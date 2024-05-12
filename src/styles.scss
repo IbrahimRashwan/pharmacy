@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url("assets/fonts/STCForward/style-sheet.scss");
+
+
+html,body {
+    margin: 0; 
+    font-family: "STCForward-Regular"  !important;
+    background-color: #F3F3F1;
+    height: 100vh; 
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+ 
+ }
+
+
+
+ .bg-cover{
+    background-image: url("assets/img/cover-bg.png");
+    background-position: center center;
+    background-size: cover;
+}
