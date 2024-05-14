@@ -1,1 +1,86 @@
-<p>doctor works!</p>
+<div class="stc-doctor">
+  <div class="stc-container">
+    <div class="stc-grid stc-grid-cols-12 stc-gap-md lg:stc-p-7x">
+        <div class="stc-col-span-12 lg:stc-col-span-4">
+            <div class="stc-flex stc-items-center stc-justify-center stc-w-full stc-bg-natural-100 stc-rounded-sm stc-p-4x">
+                <img class="stc-w-full stc-h-full" src="assets/img/map.jpg" alt="map.jpg">
+            </div>
+            <div class="stc-my-7x">
+              <div class="stc-bg-natural-100 stc-rounded-sm stc-p-4x">
+                    <img class="stc-w-full stc-h-full" src="assets/img/product-phrmacy.jpeg" alt="product-phrmacy">
+                  <div class="stc-text-4x">نيكسيماش 40 مجم 28 كبسوله</div>
+                  <div class="stc-text-3x stc-text-natural-500">تيست</div>
+                  <div class="stc-flex stc-items-center stc-gap-md">
+                       <div class="stc-flex stc-flex-col stc-items-start ">
+                          <span class=" ">اسم المنتج</span>
+                          <span class="stc-text-[#5341C7] stc-font-xbold">106.5 ج.م</span>
+                       </div>
+                       <span class="stc-line-through stc-text-natural-500">150 ج.م</span>
+                  </div>
+                  <div class="stc-w-full stc-text-center stc-mt-4x">
+                      <button class="stc-font-xbold stc-text-natural-100 stc-text-center stc-bg-[#012269] stc-rounded-xs stc-px-7x stc-py-2x">أضف للعربة</button>
+                  </div>
+              </div>
+              </div>
+        </div>
+
+        <div class="stc-col-span-12 lg:stc-col-span-8">
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                      <p>This is the primary content of the panel.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                         معلومات المريض
+                        </mat-panel-title>
+                        <mat-panel-description>
+                           {{panelOpenState ? '' : ''}}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="stc-flex stc-flex-col stc-gap-xxxxl"> 
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x">اسم المريض:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x">السن:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x">الطول:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x">الوزن:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x">الحيوانات:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x">العنوان:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x">التشخيص:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x">التامين الصحي:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                        <div class="stc-flex stc-items-center stc-gap-md">
+                          <p class="stc-text-4x"> الموافقه الطبيه:</p>
+                          <p class="stc-text-4x">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                  
+            </div>
+        </div>
+    </div>
+</div>
