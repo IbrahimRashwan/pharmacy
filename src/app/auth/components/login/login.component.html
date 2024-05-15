@@ -1,0 +1,19 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="stc-w-full stc-py-4x">
+  <mat-form-field appearance="fill" class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email">
+      <div *ngIf="loginForm?.get('email')?.touched && loginForm?.get('email')?.errors">
+        <mat-error *ngIf="loginForm?.get('email')?.errors!['required']">This field is required</mat-error>
+        <mat-error *ngIf="loginForm?.get('email')?.errors!['email']">Invalid email address</mat-error>
+      </div>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="stc-w-full stc-mb-2x stc-block">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" placeholder="Password">
+      <div *ngIf="loginForm?.get('password')?.touched && loginForm?.get('password')?.errors">
+        <mat-error *ngIf="loginForm?.get('password')?.errors!['required']">This field is required</mat-error>
+      </div>
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary" class="stc-w-25%">Login</button>
+  </form>
+  <mat-error *ngIf="showError">Email or password incorrect</mat-error>
