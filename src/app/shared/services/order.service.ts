@@ -11,7 +11,7 @@ export class OrderService {
   addOrder(order: IOrder):void{
     this.orders.update(orders => {
       orders?.push({...order})
-      return orders
+      return [...orders]
     });
     this.cartService.emptyCart();
   }
