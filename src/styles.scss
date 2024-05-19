@@ -6,13 +6,14 @@
 
 
 html,body {
-    margin: 0; 
+    margin: 0;
     font-family: "STCForward-Regular"  !important;
     background-color: #F3F3F1;
-    height: 100vh; 
+    height: 100vh;
     scroll-behavior: smooth;
     box-sizing: border-box;
- 
+    direction: ltr;
+
  }
 
 

@@ -1,0 +1,21 @@
+@if (order()) {
+
+  <div class="stc-container stc-pb-9x stc-px-0x">
+    <div class="stc-grid stc-grid-cols-12">
+      <div class="stc-col-span-12">
+          <div class="stc-py-6x stc-flex stc-justify-between stc-items-center">
+              <span class="stc-text-extended-black-600">Order Details</span>
+          </div>
+      </div>
+  </div>
+    <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">
+        <div class="stc-col-span-12 lg:stc-col-span-12 stc-bg-natural-100 stc-p-4x stc-rounded-sm">
+            <div class="stc-flex stc-flex-col stc-gap-xxxxxl">
+              <app-order-card [order]="order()"/>
+            </div>
+        </div>
+    </div>
+  </div>
+} @else {
+  Not found
+}

@@ -16,9 +16,12 @@ module.exports = {
       inherit: 'inherit',
       current: 'currentColor',
       transparent: 'transparent',
+      white:{
+        DEFAULT: 'white',
+      },
       primary: {
         DEFAULT: '#4E008B',
-        100: '#4f008c', // #4f008c 
+        100: '#4f008c', // #4f008c
         200: '#4F0C8C', // #4F0C8C
         300: '#4F0C8C1A', // #4F0C8C1A
         400: '#A54EE1', // ##A54EE1
@@ -95,7 +98,7 @@ module.exports = {
           200:'#FFEFF2', // #FFEFF2
           300:'#FF395F', // #FF395F
         },
-      
+
       },
       /** extended */
       extended: {

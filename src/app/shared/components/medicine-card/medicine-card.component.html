@@ -1,12 +1,11 @@
 <div class="stc-bg-natural-100 stc-rounded-sm stc-p-4x">
       <img class="stc-w-full stc-h-full" [src]="medicine().image" [alt]="medicine().name">
     <div class="stc-text-4x">{{medicine().name}}</div>
-    <div class="stc-text-3x stc-text-natural-500">تيست</div>
     <div class="stc-flex stc-items-center stc-justify-between">
           <span class="stc-line-through stc-text-natural-500">{{medicine().price | currency: '$'}}</span>
     </div>
     <div class="stc-w-full stc-text-center stc-mt-4x">
-        <button class="stc-font-xbold stc-text-natural-100 stc-text-center stc-bg-[#012269] stc-rounded-xs stc-px-7x stc-py-2x">أضف للعربة</button>
+        <button (click)="inCart() ? removeMedicine.emit(null) : addMedicine.emit(null)" class="stc-font-xbold stc-text-natural-100 stc-text-center stc-bg-[#012269] stc-rounded-xs stc-px-7x stc-py-2x">{{inCart() ? 'Remove from' : 'Add to'}} cart</button>
     </div>
 </div>
 

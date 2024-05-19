@@ -1,0 +1,13 @@
+<ul class="stc-pb-7x ">
+  <h1 class="stc-mb-7x  stc-cursor-pointer" [routerLink]="['/order', order().orderNumber]">Prescription #{{order().orderNumber}}</h1>
+  <h2 class="stc-mb-7x stc-cursor-pointer" routerLink="/profile" [queryParams]="{email: order().patient()?.email}">Patient name: {{order().patient()?.name}}</h2>
+  @for (item of order().items(); track item.id) {
+    <li>R/{{item.name}}</li>
+  }
+</ul>
+<div>
+  <h1>Medical analysis</h1>
+  <p>
+    {{order().medicalAnalysis() || "NA"}}
+  </p>
+</div>

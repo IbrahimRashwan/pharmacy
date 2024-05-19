@@ -1,0 +1,129 @@
+<div class="stc-doctor">
+  <div class="stc-container">
+    <div class="stc-grid stc-grid-cols-12 stc-gap-md lg:stc-p-7x">
+        <div class="stc-col-span-12 lg:stc-col-span-4">
+            <div class="stc-flex stc-items-center stc-justify-center stc-w-full stc-bg-natural-100 stc-rounded-sm stc-p-4x">
+                <img class="stc-w-full stc-h-full" src="assets/img/map.jpg" alt="map.jpg">
+            </div>
+            <div class="stc-flex stc-items-center stc-justify-center stc-w-full stc-bg-natural-100 stc-rounded-sm stc-p-4x">
+              <mat-card class="stc-w-full">
+                <mat-card-header>
+                  <mat-card-title>{{profile()?.name}}({{profile()?.role}})</mat-card-title>
+                  <mat-card-subtitle>{{profile()?.email}}</mat-card-subtitle>
+                </mat-card-header>
+              </mat-card>
+            </div>
+        </div>
+
+        <div class="stc-col-span-12 lg:stc-col-span-8">
+          <div class="stc-grid stc-grid-cols-12">
+            <div class="stc-col-span-12">
+                <div class="stc-py-6x stc-flex stc-justify-between stc-items-center">
+                    <span class="stc-text-extended-black-600">Orders: ({{(profile()?.role == patientRole ? filteredOrders : orders)().length}})</span>
+                    <mat-form-field>
+                      <mat-label>Search</mat-label>
+                      <input [(ngModel)]="keyword" matInput placeholder="Placeholder">
+                      <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+            <mat-tab-group animationDuration="0ms">
+              <mat-tab label="Your orders">
+                <div class="stc-container stc-pb-9x stc-px-0x">
+
+                  <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">
+                      <div class="stc-col-span-12 lg:stc-col-span-12 stc-bg-natural-100 stc-p-4x stc-rounded-sm">
+                          <div class="stc-flex stc-flex-col stc-gap-xxxxxl">
+                              @for (order of profile()?.role == patientRole ? filteredOrders() : orders(); track order.orderNumber) {
+                                <app-order-card [order]="order" class="stc-border stc-border-natural-500 stc-rounded-xxs stc-p-4x"/>
+                              } @empty {
+                                No Orders Found
+                              }
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </mat-tab>
+              @if (profile()?.role == patientRole) {
+                <mat-tab label="Kids">
+                  <div class="stc-container stc-pb-9x stc-px-0x">
+
+                    <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">
+                        <div class="stc-col-span-12 lg:stc-col-span-12 stc-bg-natural-100 stc-p-4x stc-rounded-sm">
+                            <div class="stc-flex stc-flex-col stc-gap-xxxxxl">
+                                @for (order of filteredOrders(); track order.orderNumber) {
+                                  <app-order-card [order]="order" class="stc-border stc-border-natural-500 stc-rounded-xxs stc-p-4x"/>
+                                } @empty {
+                                  No Orders Found
+                                }
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+                </mat-tab>
+                <mat-tab label="Pets">
+                  <div class="stc-container stc-pb-9x stc-px-0x">
+                    <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">
+                        <div class="stc-col-span-12 lg:stc-col-span-12 stc-bg-natural-100 stc-p-4x stc-rounded-sm">
+                            <div class="stc-flex stc-flex-col stc-gap-xxxxxl">
+                                @for (order of filteredOrders(); track order.orderNumber) {
+                                  <app-order-card [order]="order" class="stc-border stc-border-natural-500 stc-rounded-xxs stc-p-4x"/>
+                                } @empty {
+                                  No Orders Found
+                                }
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+                </mat-tab>
+              }
+              @if (profile()?.role == superAdminRole) {
+                <mat-tab label="Doctors">
+                  <div class="stc-container stc-pb-9x stc-px-0x">
+                    <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">
+                        <div class="stc-col-span-12 lg:stc-col-span-12 stc-bg-natural-100 stc-p-4x stc-rounded-sm">
+                            <div class="stc-flex stc-flex-col stc-gap-xxxxxl">
+                                @for (doctor of doctors; track doctor.email) {
+                                  <div class="stc-cursor-pointer" routerLink="/profile" [queryParams]="{email: doctor.email}">
+                                    <h1>Name: {{doctor.name}}</h1>
+                                    <hr/>
+                                  </div>
+                                } @empty {
+                                  No Doctors Found
+                                }
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+                </mat-tab>
+              }
+              @if (profile()?.role != patientRole) {
+                <mat-tab label="Patients">
+                  <div class="stc-container stc-pb-9x stc-px-0x">
+                    <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">
+                        <div class="stc-col-span-12 lg:stc-col-span-12 stc-bg-natural-100 stc-p-4x stc-rounded-sm">
+                            <div class="stc-flex stc-flex-col stc-gap-xxxxxl">
+                                @for (patient of patients; track patient.email) {
+                                  <div class="stc-cursor-pointer" routerLink="/profile" [queryParams]="{email: patient.email}">
+                                    <h1>Name: {{patient.name}}</h1>
+                                    <hr/>
+                                  </div>
+                                } @empty {
+                                  No Patients Found
+                                }
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+                </mat-tab>
+              }
+            </mat-tab-group>
+        </div>
+        </div>
+    </div>
+</div>

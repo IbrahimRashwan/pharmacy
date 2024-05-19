@@ -1,4 +1,4 @@
-import { Component, InputSignal, input } from '@angular/core';
+import { Component, InputSignal, Output, OutputEmitterRef, input, output } from '@angular/core';
 import { IMedicine } from '../../../core/models/medicine.model';
 import { CurrencyPipe } from '@angular/common';
 
@@ -13,5 +13,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class MedicineCardComponent {
   medicine: InputSignal<IMedicine> = input.required();
-
+  inCart: InputSignal<boolean> = input(false);
+  addMedicine: OutputEmitterRef<null> = output();
+  removeMedicine: OutputEmitterRef<null> = output();
 }

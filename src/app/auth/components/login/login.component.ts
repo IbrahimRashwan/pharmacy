@@ -14,7 +14,6 @@ import { NgIf } from '@angular/common';
     ReactiveFormsModule,
     NgIf
   ],
-  providers:[AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

@@ -2,4 +2,43 @@
 <!-- <app-patient></app-patient> -->
 <!-- <app-login></app-login> -->
 <!-- <app-doctor></app-doctor> -->
-<router-outlet></router-outlet>
+<div class="stc-justify-end stc-justify-start stc-justify-between"></div>
+@if (profile()) {
+  <div class="bg-cover">
+    <div class="stc-grid stc-grid-cols-12 ">
+      <div class="stc-col-span-12 ">
+        <div class="stc-grid-cols-12 stc-border-b stc-border-[#f3f3f352]  stc-grid stc-items-center stc-justify-start stc-p-4x">
+          <div class="stc-flex stc-flex-col stc-items-center stc-col-span-2">
+            <span class="stc-text-natural-500 stc-text-4.5x">Pharmacy</span>
+          </div>
+          <div class="stc-border-b stc-border-[#f3f3f352]  stc-col-span-10 stc-flex stc-items-center stc-justify-{{profile()?.role != patientRole ? 'between' : 'end'}} stc-p-4x">
+            @if (profile()?.role != patientRole) {
+              <div class="stc-flex stc-space-x-5">
+                <a routerLink="/category" routerLinkActive="stc-bg-grey-900 stc-text-white" class="stc-text-grey-300 hover:text-bg-grey-700 hover:stc-text-white stc-rounded-md stc-px-3x stc-py-2x stc-text-sm stc-font-medium" >Categories</a>
+                <a routerLink="/order"  routerLinkActive="stc-bg-grey-900 stc-text-white"  class="stc-text-grey-300 hover:text-bg-grey-700 hover:stc-text-white stc-rounded-md stc-px-3x stc-py-2x stc-text-sm stc-font-medium">Orders</a>
+              </div>
+            }
+            <div class="stc-flex stc-space-x-5">
+              <button mat-icon-button [matMenuTriggerFor]="menu" class="stc-text-white" aria-label="Example icon-button with a menu">
+                <mat-icon>person</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/profile">
+                  <mat-icon>person</mat-icon>
+                  <span>Profile</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                  <mat-icon>logout</mat-icon>
+                  <span>Logout</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+<div>
+  <router-outlet></router-outlet>
+</div>
