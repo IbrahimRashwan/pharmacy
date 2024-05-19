@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { Role } from '../../../auth/enums/user-role.enum';
 import { DOCTORS, PATIENTS } from '../../../auth/constants/users.constant';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +28,8 @@ import { DOCTORS, PATIENTS } from '../../../auth/constants/users.constant';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -40,6 +42,8 @@ export class ProfileComponent {
   keyword: WritableSignal<string> = signal("");
   patientRole: Role = Role.Patient;
   superAdminRole: Role = Role.SuperAdmin;
+  pharmacyRole: Role = Role.Pharmacy;
+  doctorRole: Role = Role.Doctor;
   doctors: IUser[] = DOCTORS;
   patients: IUser[] = PATIENTS;
   profile: Signal<IUser | null> = computed(() => {

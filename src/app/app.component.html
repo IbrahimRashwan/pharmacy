@@ -14,11 +14,21 @@
           <div class="stc-border-b stc-border-[#f3f3f352]  stc-col-span-10 stc-flex stc-items-center stc-justify-{{profile()?.role != patientRole ? 'between' : 'end'}} stc-p-4x">
             @if (profile()?.role != patientRole) {
               <div class="stc-flex stc-space-x-5">
-                <a routerLink="/category" routerLinkActive="stc-bg-grey-900 stc-text-white" class="stc-text-grey-300 hover:text-bg-grey-700 hover:stc-text-white stc-rounded-md stc-px-3x stc-py-2x stc-text-sm stc-font-medium" >Categories</a>
+                @if (profile()?.role != pharmacyRole) {
+                  <a routerLink="/category" routerLinkActive="stc-bg-grey-900 stc-text-white" class="stc-text-grey-300 hover:text-bg-grey-700 hover:stc-text-white stc-rounded-md stc-px-3x stc-py-2x stc-text-sm stc-font-medium" >Categories</a>
+                }
                 <a routerLink="/order"  routerLinkActive="stc-bg-grey-900 stc-text-white"  class="stc-text-grey-300 hover:text-bg-grey-700 hover:stc-text-white stc-rounded-md stc-px-3x stc-py-2x stc-text-sm stc-font-medium">Orders</a>
               </div>
             }
             <div class="stc-flex stc-space-x-5">
+              @if (profile()?.role == doctorRole) {
+                <button mat-icon-button class="stc-text-white" routerLink="/category" [queryParams]="{email: profile()?.email}">
+                  <mat-icon>favorite</mat-icon>({{profile()?.preferredMedicines && profile()?.preferredMedicines()?.length  || 0}})
+                </button>
+              }
+              <button mat-icon-button class="stc-text-white" routerLink="/category" >
+                <mat-icon>shopping_cart</mat-icon>({{cart().items().length  || 0}})
+              </button>
               <button mat-icon-button [matMenuTriggerFor]="menu" class="stc-text-white" aria-label="Example icon-button with a menu">
                 <mat-icon>person</mat-icon>
               </button>

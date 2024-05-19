@@ -2,7 +2,7 @@
 <div class="bg-cover">
   <div class="stc-grid stc-grid-cols-12 stc-py-6x stc-gap-md">
     @for (category of categories; track category.id) {
-      <app-category-card class="stc-col-span-12 lg:stc-col-span-2 stc-justify-self-center" [category]="category" routerLink="./" [queryParams]="{selectedCategory: category.id}"/>
+      <app-category-card class="stc-col-span-12 lg:stc-col-span-2 stc-justify-self-center" [category]="category" routerLink="./" [queryParams]="{selectedCategory: category.id, email: email()}"/>
     }
   </div>
 </div>
@@ -11,19 +11,19 @@
       <div class="stc-col-span-12">
           <div class="stc-py-6x stc-flex stc-justify-between stc-items-center">
               <span class="stc-text-extended-black-600">Medicines: ({{medicines.length}})</span>
-              <span routerLink="./" class="stc-text-accent-coral-100 stc-cursor-pointer">Show all</span>
+              <span routerLink="./" [queryParams]="{selectedCategory: 0, email: email()}" class="stc-text-accent-coral-100 stc-cursor-pointer">Show all</span>
           </div>
       </div>
   </div>
   <div class="stc-grid stc-col-span-1 stc-grid-cols-12 stc-gap-xxxxl">
-    @if (cart().items().length) {
+    @if (email() && profile()?.role != pharmacyRole) {
       <div class="stc-col-span-12 lg:stc-col-span-8">
         <app-cart/>
       </div>
     }
-    <div class="stc-col-span-12 lg:stc-col-span-{{cart().items().length ? '4' : '12'}} stc-grid stc-grid-cols-{{cart().items().length ? '2' : '12'}}">
+    <div class="stc-col-span-12 lg:stc-col-span-{{email() && profile()?.role != pharmacyRole ? '4' : '12'}} stc-grid stc-grid-cols-{{email() && profile()?.role != pharmacyRole ? '2' : '12'}}">
       @for (medicine of medicines; track medicine.id) {
-        <app-medicine-card class="stc-col-span-12  stc-mb-9x lg:stc-col-span-{{cart().items().length ? '1' : '3'}}" [medicine]="medicine" (addMedicine)="cartService.addMedicine(medicine)"/>
+        <app-medicine-card class="stc-col-span-12  stc-mb-9x lg:stc-col-span-{{email() && profile()?.role != pharmacyRole ? '1' : '3'}}" [medicine]="medicine" (addMedicine)="cartService.addMedicine(medicine)" [email]="email()" [showActions]="profile()?.role != pharmacyRole"/>
       } @empty {
         <div class="stc-col-span-12 stc-text-center">
           No medicines in this category

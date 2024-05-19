@@ -5,7 +5,13 @@
           <span class="stc-line-through stc-text-natural-500">{{medicine().price | currency: '$'}}</span>
     </div>
     <div class="stc-w-full stc-text-center stc-mt-4x">
-        <button (click)="inCart() ? removeMedicine.emit(null) : addMedicine.emit(null)" class="stc-font-xbold stc-text-natural-100 stc-text-center stc-bg-[#012269] stc-rounded-xs stc-px-7x stc-py-2x">{{inCart() ? 'Remove from' : 'Add to'}} cart</button>
+      @if (showActions()) {
+        @if(email()){
+          <button (click)="inCart() ? removeMedicine.emit(null) : addMedicine.emit(null)" class="stc-font-xbold stc-text-natural-100 stc-text-center stc-bg-[#012269] stc-rounded-xs stc-px-7x stc-py-2x">{{inCart() ? 'Remove from' : 'Add to'}} cart</button>
+        } @else{
+          <button (click)="preferredMedicineService.toggleMedicine(medicine())" class="stc-font-xbold stc-text-natural-100 stc-text-center stc-bg-[#012269] stc-rounded-xs stc-px-7x stc-py-2x">{{ (preferredMedicines | isPreferred:medicine().id) ? 'Remove from' : 'Add to'}} prefer</button>
+        }
+      }
     </div>
 </div>
 

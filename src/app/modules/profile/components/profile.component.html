@@ -11,6 +11,13 @@
                   <mat-card-title>{{profile()?.name}}({{profile()?.role}})</mat-card-title>
                   <mat-card-subtitle>{{profile()?.email}}</mat-card-subtitle>
                 </mat-card-header>
+                <mat-card-content>
+                  @if (profile()?.role == doctorRole) {
+                    <button mat-raised-button [color]="'primary'" routerLink="/category" [queryParams]="{email: profile()?.email}">
+                      Preferred Medicine ({{profile()?.preferredMedicines()?.length || 0}})
+                    </button>
+                  }
+                </mat-card-content>
               </mat-card>
             </div>
         </div>
@@ -80,7 +87,7 @@
 
                 </mat-tab>
               }
-              @if (profile()?.role == superAdminRole) {
+              @if (profile()?.role == doctorRole) {
                 <mat-tab label="Doctors">
                   <div class="stc-container stc-pb-9x stc-px-0x">
                     <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">
@@ -101,7 +108,28 @@
 
                 </mat-tab>
               }
-              @if (profile()?.role != patientRole) {
+              @if (profile()?.role == superAdminRole || profile()?.role == pharmacyRole) {
+                <mat-tab label="Doctors">
+                  <div class="stc-container stc-pb-9x stc-px-0x">
+                    <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">
+                        <div class="stc-col-span-12 lg:stc-col-span-12 stc-bg-natural-100 stc-p-4x stc-rounded-sm">
+                            <div class="stc-flex stc-flex-col stc-gap-xxxxxl">
+                                @for (doctor of doctors; track doctor.email) {
+                                  <div class="stc-cursor-pointer" routerLink="/profile" [queryParams]="{email: doctor.email}">
+                                    <h1>Name: {{doctor.name}}</h1>
+                                    <hr/>
+                                  </div>
+                                } @empty {
+                                  No Doctors Found
+                                }
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+                </mat-tab>
+              }
+              @if (profile()?.role != patientRole && profile()?.role != pharmacyRole) {
                 <mat-tab label="Patients">
                   <div class="stc-container stc-pb-9x stc-px-0x">
                     <div class="stc-grid stc-grid-cols-12 stc-py-7x stc-gap-md">

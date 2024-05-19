@@ -6,8 +6,8 @@ import { USERS } from '../constants/users.constant';
 @Injectable({providedIn: "root"})
 
 export class AuthService {
-  public user: WritableSignal<IUser | null> = signal(JSON.parse(localStorage.getItem('user')!));
   #users: IUser[] = USERS;
+  public user: WritableSignal<IUser | null> = this.profileByEmail(JSON.parse(localStorage.getItem('user')!)?.email);
   #router: Router = inject(Router);
 
   login(user: IUser, onSuccess?: Function, onFaild?: Function){
@@ -29,7 +29,7 @@ export class AuthService {
   profile(){
     this.user.set(JSON.parse(localStorage.getItem('user')!));
     if(this.user()){
-      this.#router.navigate(['/']);
+      this.#router.navigate(['/profile']);
     } else {
       this.#router.navigate(['/auth']);
     }
