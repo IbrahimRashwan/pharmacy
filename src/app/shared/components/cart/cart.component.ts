@@ -36,10 +36,7 @@ export class CartComponent {
 
   addOrder():void {
     const ORDER_NUMBER = this.orderService.orders().length + 1;
-    this.orderService.addOrder({
-      orderNumber: ORDER_NUMBER,
-      ...this.cart()
-    });
+    this.orderService.addOrder(this.cart());
     this.router.navigate(['/order', ORDER_NUMBER]);
   }
 }

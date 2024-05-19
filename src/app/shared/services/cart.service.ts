@@ -28,7 +28,7 @@ export class CartService {
   }
 
   emptyCart():void {
-    this.cart = signal({
+    this.cart.set({
       items: signal([]),
       patient: signal(null),
       medicalAnalysis: signal(""),
