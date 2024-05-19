@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   profile(){
-    this.user.set(JSON.parse(localStorage.getItem('user')!));
+    this.user.set({...JSON.parse(localStorage.getItem('user')!), preferredMedicines: signal([])});
     if(this.user()){
       this.#router.navigate(['/profile']);
     } else {
