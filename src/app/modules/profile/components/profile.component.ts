@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { Role } from '../../../auth/enums/user-role.enum';
 import { DOCTORS, PATIENTS } from '../../../auth/constants/users.constant';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { CreateOrderComponent } from '../../order/components/create-order/create-order.component';
 
 @Component({
   selector: 'app-profile',
@@ -37,6 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class ProfileComponent {
   authService: AuthService = inject(AuthService);
   orderService: OrderService = inject(OrderService);
+  dialog: MatDialog = inject(MatDialog);
   email: InputSignal<string | undefined> = input();
   orders!: WritableSignal<IOrder[]>;
   keyword: WritableSignal<string> = signal("");
@@ -54,4 +57,18 @@ export class ProfileComponent {
     return [...this.orders()?.filter(order => this.keyword()?.length ? order.orderNumber == this.keyword() as any : true )]
   });
 
+
+  openCreateOrderDialog(): void {
+    const DIALOG = this.dialog.open(CreateOrderComponent, {
+      minWidth: "80%",
+      data:{
+        patient: this.profile()
+      }
+    });
+    const SUB = DIALOG.afterClosed().subscribe((order:IOrder) => {
+      this.orderService.addOrder(order);
+      console.log("order", order.file!());
+      SUB.unsubscribe();
+    })
+  }
 }

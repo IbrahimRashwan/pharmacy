@@ -33,6 +33,9 @@
                       <mat-icon matSuffix>search</mat-icon>
                     </mat-form-field>
                 </div>
+                @if (profile()?.role == patientRole) {
+                  <button mat-raised-button color="primary" (click)="openCreateOrderDialog()">Create Order</button>
+                }
             </div>
         </div>
             <mat-tab-group animationDuration="0ms">

@@ -8,6 +8,8 @@ export class CartService {
     items: signal([]),
     patient: signal(null),
     medicalAnalysis: signal(""),
+    notes: signal(""),
+    file: signal(""),
     subtotal: signal(0)
   });
 
@@ -32,6 +34,8 @@ export class CartService {
       items: signal([]),
       patient: signal(null),
       medicalAnalysis: signal(""),
+      notes: signal(""),
+      file: signal(""),
       subtotal: signal(0)
     });
   }

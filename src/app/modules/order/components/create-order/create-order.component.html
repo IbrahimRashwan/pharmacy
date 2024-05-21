@@ -1,35 +1,30 @@
-
-<div class="stc-container stc-pb-9x stc-px-0x">
+<h2 mat-dialog-title>Create Order</h2>
+<mat-dialog-content>
   <mat-form-field appearance="fill" class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
-    <mat-label>Patients</mat-label>
-    <mat-select matInput [(ngModel)]="cart().patient">
-      @for (patient of patients; track $index) {
-        <mat-option [value]="patient">{{patient.name}}</mat-option>
+    <mat-label>Medicines</mat-label>
+    <mat-select matInput [(ngModel)]="cart().items" multiple>
+      @for (medicine of medicines; track $index) {
+        <mat-option [value]="medicine">{{medicine.name}}</mat-option>
       }
     </mat-select>
   </mat-form-field>
-  <div class="stc-grid stc-grid-cols-12">
-    @for (medicine of cart().items(); track medicine.id; let i = $index) {
-      <app-medicine-card class="stc-col-span-12 lg:stc-col-span-6 stc-mb-9x" [medicine]="medicine" (removeMedicine)="cartService.removeMedicine(i,medicine)" [inCart]="true"/>
-    } @empty {
-      <div class="stc-col-span-12 stc-text-center">
-        Cart empty
-      </div>
+  <div class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
+    <mat-label class="stc-block stc-w-full">Prescription</mat-label>
+    <input class="stc-block stc-w-full" type="file" (change)="onFileSelected($event)" />
+    @if (cart().file && cart().file!()) {
+      <img [src]="cart().file!()" alt="File" class="stc-w-90x stc-h-90x stc-object-cover"/>
     }
-    <div class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
-      <mat-label class="stc-block stc-w-full">Prescription</mat-label>
-      <input class="stc-block stc-w-full" type="file" (change)="onFileSelected($event)" />
-      @if (cart().file && cart().file!()) {
-        <img [src]="cart().file!()" alt="File" class="stc-w-90x stc-h-90x stc-object-cover"/>
-      }
 
-    </div>
+  </div>
+  <div class="stc-grid stc-grid-cols-12">
     <div class="stc-col-span-12">
       <mat-form-field appearance="fill" class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
         <mat-label>Notes</mat-label>
         <textarea class="stc-block stc-w-full" rows="6" id="notes" [(ngModel)]="cart().notes" matInput></textarea>
       </mat-form-field>
     </div>
+  </div>
+  <div class="stc-grid stc-grid-cols-12">
     <div class="stc-col-span-12">
       <mat-form-field appearance="fill" class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
         <mat-label>Medical Analysis</mat-label>
@@ -41,4 +36,5 @@
   <h1 class="stc-font-bold">Subtotal: {{cart().subtotal() | currency:'$'}} </h1>
   <div class="stc-w-full stc-text-center stc-mt-4x">
     <button class="stc-font-xbold stc-text-natural-100 stc-text-center stc-bg-[#012269] stc-rounded-xs stc-px-7x stc-py-2x" (click)="addOrder()">Add order</button>
-</div></div>
+  </div>
+</mat-dialog-content>

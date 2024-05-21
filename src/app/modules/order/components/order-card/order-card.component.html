@@ -5,6 +5,20 @@
     <li>R/{{item.name}}</li>
   }
 </ul>
+@if (order().file && order().file!()) {
+  <div>
+    <h1>Prescription</h1>
+    <img [src]="order().file!()" alt="File" class="stc-w-90x stc-h-90x stc-object-cover"/>
+  </div>
+}
+@if (order().notes && order().notes!()) {
+  <div>
+    <h1>Notes</h1>
+    <p>
+      {{order().notes!() || "NA"}}
+    </p>
+  </div>
+}
 <div>
   <h1>Medical analysis</h1>
   <p>

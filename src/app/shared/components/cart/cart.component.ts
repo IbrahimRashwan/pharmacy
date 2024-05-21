@@ -39,4 +39,19 @@ export class CartComponent {
     this.orderService.addOrder(this.cart());
     this.router.navigate(['/order', ORDER_NUMBER]);
   }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.cart().file?.set(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
 }
