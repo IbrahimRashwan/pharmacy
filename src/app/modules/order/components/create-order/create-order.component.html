@@ -8,6 +8,13 @@
       }
     </mat-select>
   </mat-form-field>
+  <mat-form-field appearance="fill" class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
+    <mat-label>Delivery Type</mat-label>
+    <mat-select matInput [(ngModel)]="cart().deliveryType">
+      <mat-option value="Delivery">Delivery</mat-option>
+      <mat-option value="Pharmacy">Pharmacy</mat-option>
+    </mat-select>
+  </mat-form-field>
   <div class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
     <mat-label class="stc-block stc-w-full">Prescription</mat-label>
     <input class="stc-block stc-w-full" type="file" (change)="onFileSelected($event)" />

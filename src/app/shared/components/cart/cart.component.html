@@ -8,6 +8,13 @@
       }
     </mat-select>
   </mat-form-field>
+  <mat-form-field appearance="fill" class="stc-w-full stc-mt-4x stc-mb-2x stc-block">
+    <mat-label>Delivery Type</mat-label>
+    <mat-select matInput [(ngModel)]="cart().deliveryType">
+      <mat-option value="Delivery">Delivery</mat-option>
+      <mat-option value="Pharmacy">Pharmacy</mat-option>
+    </mat-select>
+  </mat-form-field>
   <div class="stc-grid stc-grid-cols-12">
     @for (medicine of cart().items(); track medicine.id; let i = $index) {
       <app-medicine-card class="stc-col-span-12 lg:stc-col-span-6 stc-mb-9x" [medicine]="medicine" (removeMedicine)="cartService.removeMedicine(i,medicine)" [inCart]="true"/>

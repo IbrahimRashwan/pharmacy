@@ -11,6 +11,9 @@
     <img [src]="order().file!()" alt="File" class="stc-w-90x stc-h-90x stc-object-cover"/>
   </div>
 }
+<div>
+  <h1>Delivery Type: {{order().deliveryType && order().deliveryType!()}}</h1>
+</div>
 @if (order().notes && order().notes!()) {
   <div>
     <h1>Notes</h1>
@@ -25,3 +28,8 @@
     {{order().medicalAnalysis() || "NA"}}
   </p>
 </div>
+@if (displayReorder()) {
+  <button mat-raised-button color="primary" (click)="addOrder()">
+    Reorder
+  </button>
+}

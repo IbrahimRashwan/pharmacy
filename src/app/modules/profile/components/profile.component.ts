@@ -15,8 +15,9 @@ import { FormsModule } from '@angular/forms';
 import { Role } from '../../../auth/enums/user-role.enum';
 import { DOCTORS, PATIENTS } from '../../../auth/constants/users.constant';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { CreateOrderComponent } from '../../order/components/create-order/create-order.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -40,6 +41,7 @@ export class ProfileComponent {
   authService: AuthService = inject(AuthService);
   orderService: OrderService = inject(OrderService);
   dialog: MatDialog = inject(MatDialog);
+  snackBar: MatSnackBar = inject(MatSnackBar);
   email: InputSignal<string | undefined> = input();
   orders!: WritableSignal<IOrder[]>;
   keyword: WritableSignal<string> = signal("");
@@ -67,6 +69,9 @@ export class ProfileComponent {
     });
     const SUB = DIALOG.afterClosed().subscribe((order:IOrder) => {
       this.orderService.addOrder(order);
+      setTimeout(() => {
+        this.snackBar.open("Phamracy accept your order, you will get it from"+ order.deliveryType && order.deliveryType!(), "Order")
+      }, 5000)
       console.log("order", order.file!());
       SUB.unsubscribe();
     })
